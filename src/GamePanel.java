@@ -115,8 +115,44 @@ public class GamePanel extends JPanel implements ActionListener{
 		
 	}
 	
-	public void checkCollections() {
-		
+	// checks if headcollides with body
+	
+	public void checkCollisions() {
+			for (int i = bodyParts;i>0;i--) {
+				if ((x[0] == x[i]) && (y[0] == y[i])) {
+					running = false;
+				}
+			}
+			
+			
+			// check if head thouch the left the boarder
+			
+			if ((x[0] < 0)) {
+				running = false;
+			}
+			
+			// check if head thouch the right the boarder
+			
+			if ((x[0] > SCREEN_WIDTH)) {
+				running = false;
+			}
+			
+			// check if head thouch the TOP boarder
+			
+
+			if ((y[0] < 0)) {
+				running = false;
+			}
+			
+			// check if head thouch the down boarder
+			
+
+			if ((y[0] > SCREEN_HEIGHT)) {
+				running = false;
+			}
+			if (!running) {
+				timer.stop();
+			}
 	}
 	
 	public void gameover(Graphics g) {
@@ -124,8 +160,13 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
+		if (running) {
+			move();
+			checkApple();
+			checkCollisions();
+		}
+		repaint();
 		
 	}
 	
